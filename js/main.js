@@ -1,6 +1,3 @@
-const trending_section = document.querySelector('#trending_preview .trending_preview-movieList');
-const categories_section = document.querySelector('#categories_preview .categories_preview-list');
-
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     headers: {

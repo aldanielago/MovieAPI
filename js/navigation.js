@@ -1,20 +1,16 @@
-window.addEventListener('DOMContentLoaded', navegator, false);
-window.addEventListener('hashchange', navegator, false);
+window.addEventListener('DOMContentLoaded', navegator, true);
+window.addEventListener('hashchange', navegator, true);
 
 function navegator(){
-    if(location.hash.startsWith('#trends')){
-        trendsPage();
-    } else if(location.hash.startsWith('#search=')){
-        searchPage();
-    } else if(location.hash.startsWith('#movie=')){
-        movieDetailsPage();
-    } else if(location.hash.startsWith('#category=')){
-        categoriesPage();
-    } else {
-        homePage();
-    }
-
-    location.hash
+    location.hash.startsWith('#trends') ?
+    trendsPage() :
+    location.hash.startsWith('#search=') ?
+    searchPage() :
+    location.hash.startsWith('#movie=') ?
+    movieDetailsPage() :
+    location.hash.startsWith('#category=') ?
+    categoriesPage() :
+    homePage()
 }
 
 function homePage(){
