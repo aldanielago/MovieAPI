@@ -4,6 +4,7 @@ const $ = (id) => document.querySelector(id);
 const header_general_section = $('#header');
 const header_title = $('.header-title')
 const header_form = $('#search_form');
+const header_input = $('#search_form input')
 const header_form_btn = $('.search_form_btn');
 const header_arrow = $('.header-arrow');
 const header_category_title = $('.header-title--category_view');

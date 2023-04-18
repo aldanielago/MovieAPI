@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', navegator, true);
 window.addEventListener('hashchange', navegator, true);
 
 header_form_btn.addEventListener('click', () => {
-    location.hash = '#search=';
+    location.hash = '#search=' + header_input.value;
 });
 
 trending_btn.addEventListener('click', () => {
@@ -23,6 +23,9 @@ function navegator(){
     location.hash.startsWith('#category=') ?
     categoriesPage() :
     homePage()
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
 
 function homePage(){
@@ -59,12 +62,15 @@ function trendsPage(){
 }
 
 function searchPage(){
+    const [_, query] = location.hash.split('=');
+    getMoviesBySearch(query);
+
     header_general_section.classList.remove('header-container--long')
     header_general_section.style.background = '';
     header_arrow.classList.remove('inactive');
     header_arrow.classList.remove('header-arrow--white');
     header_title.classList.add('inactive');
-    header_category_title.classList.remove('inactive');
+    header_category_title.classList.add('inactive');
     header_form.classList.remove('inactive');
 
     trending_general_section.classList.add('inactive');

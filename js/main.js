@@ -55,6 +55,13 @@ async function getTrendingMoviesPreview(){
     insertMovies(movies, trending_section);
 };
 
+async function getCategoryPreview(){
+    const { data } = await api('genre/movie/list');
+    const categories = data.genres;
+
+    insertCategories(categories_section, categories);
+};
+
 async function getMoviesByCategory(category_id){
     const { data } = await api('discover/movie', {
         params: {
@@ -65,9 +72,13 @@ async function getMoviesByCategory(category_id){
     insertMovies(categories, generic_list_general_section);
 }
 
-async function getCategoryPreview(){
-    const { data } = await api('genre/movie/list');
-    const categories = data.genres;
+async function getMoviesBySearch(query){
+    const { data } = await api('search/movie', {
+        params: {
+            query,
+        }
+    });
+    const movies = data.results;
 
-    insertCategories(categories_section, categories);
-};
+    insertMovies(movies, generic_list_general_section);
+}
