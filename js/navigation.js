@@ -109,5 +109,3 @@ function categoriesPage(){
 
     getMoviesByCategory(category_id);
 }
-
-// Tareita de optimizar el codigo para no repetir la parte de insertar imagenes
