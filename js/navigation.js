@@ -10,7 +10,12 @@ trending_btn.addEventListener('click', () => {
 });
 
 header_arrow.addEventListener('click', () => {
-    location.hash = '#home';
+    if(document.referrer.includes(window.location.hostname)){
+        window.history.back();
+    }
+    else {
+        location.hash = '#home';
+    }
 })
 
 function navegator(){
@@ -59,6 +64,9 @@ function trendsPage(){
     categories_general_section.classList.add('inactive');
     generic_list_general_section.classList.remove('inactive');
     movie_details_general_section.classList.add('inactive');
+
+    header_category_title.innerHTML = 'Trends';
+    getTrendingMovies();
 }
 
 function searchPage(){

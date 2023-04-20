@@ -9,6 +9,7 @@ const api = axios.create({
 })
 
 //Utils
+
 function insertMovies(movies, container){
     container.innerHTML = "";
     movies.forEach(movie => {
@@ -47,6 +48,13 @@ function insertCategories(container, categories){
 }
 
 // Llamados a la API
+
+async function getTrendingMovies(){
+    const { data } = await api('trending/movie/day');
+    const movies = data.results;
+
+    insertMovies(movies, generic_list_general_section);
+};
 
 async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day');
