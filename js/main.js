@@ -15,6 +15,9 @@ function insertMovies(movies, container){
     movies.forEach(movie => {
         const movie_container = document.createElement('div');
         movie_container.classList.add('movie-container');
+        movie_container.addEventListener('click', () => {
+            location.hash = '#movie=' + movie.id;
+        })
 
         const movie_img = document.createElement('img');
         movie_img.classList.add('alt');
@@ -78,7 +81,7 @@ async function getMoviesByCategory(category_id){
     });
     const categories = data.results;
     insertMovies(categories, generic_list_general_section);
-}
+};
 
 async function getMoviesBySearch(query){
     const { data } = await api('search/movie', {
@@ -89,4 +92,17 @@ async function getMoviesBySearch(query){
     const movies = data.results;
 
     insertMovies(movies, generic_list_general_section);
-}
+};
+
+async function getMovieById(movie_id){
+    const { data: movie } = await api('movie/' + movie_id);
+
+    movie_details_title.innerHTML = movie.title;
+    movie_detail_description.innerHTML = movie.overview;
+    movie_details_score.innerHTML = movie.vote_average;
+
+    const movie_img = 'https://image.tmdb.org/t/p/w500/' + movie.poster_path;
+    header_general_section.style.background = `url(${movie_img})`;
+
+    insertCategories(article_categories_list, movie.genres);
+};

@@ -25,7 +25,7 @@ const generic_list_general_section = $('#generic_list');
 
 //movie details
 const movie_details_general_section = $('#movie_detail');
-const movie_details_title = $('.movie_details-title');
+const movie_details_title = $('.movie_detail-title');
 const movie_details_score = $('.movie_detail-score');
 const movie_detail_description = $('.movie_detail-description');
 
