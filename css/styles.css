@@ -185,7 +185,7 @@ button {
 	width: 72px;
 }
 
-.trending_preview-movieList {
+.trending_preview-movie_list {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	white-space: nowrap;
@@ -194,12 +194,12 @@ button {
 	padding-bottom: 16px;
 }
 
-.trending_preview-movieList .movie-container {
+.trending_preview-movie_list .movie-container {
 	display: inline-block;
 	margin-right: 8px;
 }
 
-.trending_preview-movieList .movie-container .movie-img {
+.trending_preview-movie_list .movie-container .movie-img {
 	height: 225px;
 	min-height: 225px;
 	max-height: 225px;
@@ -315,7 +315,7 @@ button {
 	margin-bottom: 16px;
 }
 
-.related_movies-scrollContainer {
+.related_movies-scroll_container {
 	position: absolute;
 	overflow-x: scroll;
 	overflow-y: hidden;
@@ -324,12 +324,12 @@ button {
 	padding-bottom: 16px;
 }
 
-.related_movies-scrollContainer .movie-container {
+.related_movies-scroll_container .movie-container {
 	display: inline-block;
 	margin-right: 8px;
 }
 
-.related_movies-scrollContainer .movie-img {
+.related_movies-scroll_container .movie-img {
 	width: 125px;
 	min-width: 125px;
 	max-width: 125px;

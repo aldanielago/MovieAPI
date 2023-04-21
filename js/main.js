@@ -102,7 +102,22 @@ async function getMovieById(movie_id){
     movie_details_score.innerHTML = movie.vote_average;
 
     const movie_img = 'https://image.tmdb.org/t/p/w500/' + movie.poster_path;
-    header_general_section.style.background = `url(${movie_img})`;
+    header_general_section.style.background = `
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.35) 19.27%,
+            rgba(0, 0, 0, 0) 29.17%
+            ),
+        url(${movie_img})
+    `;
 
     insertCategories(article_categories_list, movie.genres);
+    getRelatedMovies(movie_id);
 };
+
+async function getRelatedMovies(movie_id){
+    const { data } = await api(`movie/${movie_id}/recommendations`);
+    const related = await data.results;
+
+    insertMovies(related, container_related_movies);
+}

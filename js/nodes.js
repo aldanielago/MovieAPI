@@ -13,7 +13,7 @@ const header_category_title = $('.header-title--category_view');
 const trending_general_section = $('#trending_preview');
 const trending_title = $('.trending_preview-title');
 const trending_btn = $('.trending_preview-btn');
-const trending_section = document.querySelector('#trending_preview .trending_preview-movieList');
+const trending_section = document.querySelector('#trending_preview .trending_preview-movie_list');
 
 // categories section
 const categories_general_section = $('#categories_preview');
