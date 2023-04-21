@@ -20,6 +20,7 @@ function insertMovies(movies, container){
         })
 
         const movie_img = document.createElement('img');
+        movie_img.classList.add('movie-img');
         movie_img.classList.add('alt');
         movie_img.setAttribute('alt', movie.title);
         movie_img.setAttribute('src', 'https://image.tmdb.org/t/p/w300/' + movie.poster_path)
