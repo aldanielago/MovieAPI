@@ -270,6 +270,10 @@ button {
 	width: 100%;
 }
 
+.movie-img{
+	min-height: 170px;
+}
+
 
 /* Movie Detail */
 .movie_detail-container {
