@@ -33,8 +33,14 @@ function insertMovies(movies, container, lazy_load = false){
         movie_img.classList.add('alt');
         movie_img.setAttribute('alt', movie.title);
         movie_img.setAttribute(
-            lazy_load ? 'data-img': 'src' , 'https://image.tmdb.org/t/p/w300/' + movie.poster_path
+            lazy_load ? 'data-img': 'src' ,
+            'https://image.tmdb.org/t/p/w300/' + movie.poster_path
         )
+        movie_img.addEventListener('error', () => {
+            movie_img.setAttribute(
+                'src', 'https://img.freepik.com/vector-gratis/plantilla-web-error-404-gato-malo_23-2147763345.jpg?size=300&ext=jpg'
+            )
+        })
         lazyLoader.observe(movie_img);
 
         movie_container.appendChild(movie_img);
@@ -104,7 +110,7 @@ async function getMoviesBySearch(query){
     });
     const movies = data.results;
 
-    insertMovies(movies, generic_list_general_section);
+    insertMovies(movies, generic_list_general_section, true);
 };
 
 async function getMovieById(movie_id){
