@@ -19,8 +19,11 @@ const lazyLoader = new IntersectionObserver((entries) => {
     })
 })
 
-function insertMovies(movies, container, lazy_load = false){
-    container.innerHTML = "";
+function insertMovies(movies, container, {lazy_load = false, clean = true}){
+    if(clean){
+        container.innerHTML = "";
+    }
+
     movies.forEach(movie => {
         const movie_container = document.createElement('div');
         movie_container.classList.add('movie-container');
@@ -71,18 +74,35 @@ function insertCategories(container, categories){
 
 // Llamados a la API
 
-async function getTrendingMovies(){
-    const { data } = await api('trending/movie/day');
+async function getTrendingMovies(page = 1){
+    const { data } = await api('trending/movie/day', {
+        params: {
+            page,
+        }
+    });
     const movies = data.results;
 
-    insertMovies(movies, generic_list_general_section, true);
+    if(page == 1){
+        insertMovies(movies, generic_list_general_section, {lazy_load: true});
+    }
+    else{
+        insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
+    }
+
+    const btn_load_more = document.createElement('button');
+    btn_load_more.innerText = 'Cargar más';
+    btn_load_more.addEventListener('click', () =>{
+        getTrendingMovies(page + 1);
+        btn_load_more.remove();
+    })
+    generic_list_general_section.appendChild(btn_load_more)
 };
 
 async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day');
     const movies = data.results;
 
-    insertMovies(movies, trending_section, true);
+    insertMovies(movies, trending_section, {lazy_load: true});
 };
 
 async function getCategoryPreview(){
@@ -99,7 +119,7 @@ async function getMoviesByCategory(category_id){
         },
     });
     const categories = data.results;
-    insertMovies(categories, generic_list_general_section, true);
+    insertMovies(categories, generic_list_general_section, {lazy_load: true});
 };
 
 async function getMoviesBySearch(query){
@@ -110,7 +130,7 @@ async function getMoviesBySearch(query){
     });
     const movies = data.results;
 
-    insertMovies(movies, generic_list_general_section, true);
+    insertMovies(movies, generic_list_general_section, {lazy_load: true});
 };
 
 async function getMovieById(movie_id){
