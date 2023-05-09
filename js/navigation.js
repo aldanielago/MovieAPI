@@ -1,5 +1,9 @@
-window.addEventListener('DOMContentLoaded', navegator, true);
-window.addEventListener('hashchange', navegator, true);
+let page = 1;
+let infinitive_scroll;
+
+window.addEventListener('DOMContentLoaded', navegator, false);
+window.addEventListener('hashchange', navegator, false);
+window.addEventListener('scroll', infinitive_scroll, false);
 
 header_form_btn.addEventListener('click', () => {
     location.hash = '#search=' + header_input.value;
@@ -19,6 +23,11 @@ header_arrow.addEventListener('click', () => {
 })
 
 function navegator(){
+    if(infinitive_scroll){
+        window.removeEventListener('scroll', infinitive_scroll, { passive: false} );
+        infinitive_scroll = undefined;
+    }
+
     location.hash.startsWith('#trends') ?
     trendsPage() :
     location.hash.startsWith('#search=') ?
@@ -31,6 +40,10 @@ function navegator(){
 
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+
+    if(infinitive_scroll){
+        window.addEventListener('scroll', infinitive_scroll, { passive: false });
+    }
 }
 
 function homePage(){
@@ -66,7 +79,9 @@ function trendsPage(){
     movie_details_general_section.classList.add('inactive');
 
     header_category_title.innerHTML = 'Trends';
+
     getTrendingMovies();
+    infinitive_scroll = getMoreTrendingMovies;
 }
 
 function searchPage(){

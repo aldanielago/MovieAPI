@@ -73,8 +73,7 @@ function insertCategories(container, categories){
 }
 
 // Llamados a la API
-
-async function getTrendingMovies(page = 1){
+async function getTrendingMovies(){
     const { data } = await api('trending/movie/day', {
         params: {
             page,
@@ -82,21 +81,26 @@ async function getTrendingMovies(page = 1){
     });
     const movies = data.results;
 
-    if(page == 1){
-        insertMovies(movies, generic_list_general_section, {lazy_load: true});
-    }
-    else{
+    insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: true});
+};
+
+async function getMoreTrendingMovies(){
+    const { scrollTop, scrollHeight, clientHeight} = document.documentElement;
+    const scroll_is_bottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+
+    if (scroll_is_bottom) {
+        page ++;
+        const { data } = await api('trending/movie/day', {
+            params: {
+                page,
+            },
+        });
+        const movies = data.results;
+
         insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
     }
+}
 
-    const btn_load_more = document.createElement('button');
-    btn_load_more.innerText = 'Cargar más';
-    btn_load_more.addEventListener('click', () =>{
-        getTrendingMovies(page + 1);
-        btn_load_more.remove();
-    })
-    generic_list_general_section.appendChild(btn_load_more)
-};
 
 async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day');
