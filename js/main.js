@@ -80,6 +80,7 @@ async function getTrendingMovies(){
         }
     });
     const movies = data.results;
+    max_page = data.total_pages;
 
     insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: true});
 };
@@ -87,8 +88,9 @@ async function getTrendingMovies(){
 async function getMoreTrendingMovies(){
     const { scrollTop, scrollHeight, clientHeight} = document.documentElement;
     const scroll_is_bottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+    const page_is_max = page == max_page;
 
-    if (scroll_is_bottom) {
+    if (scroll_is_bottom && !page_is_max) {
         page ++;
         const { data } = await api('trending/movie/day', {
             params: {
@@ -100,7 +102,6 @@ async function getMoreTrendingMovies(){
         insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
     }
 }
-
 
 async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day');

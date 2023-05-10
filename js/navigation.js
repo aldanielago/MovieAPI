@@ -1,4 +1,5 @@
 let page = 1;
+let max_page;
 let infinitive_scroll;
 
 window.addEventListener('DOMContentLoaded', navegator, false);
