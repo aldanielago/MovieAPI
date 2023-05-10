@@ -101,7 +101,7 @@ async function getMoreTrendingMovies(){
 
         insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
     }
-}
+};
 
 async function getTrendingMoviesPreview(){
     const { data } = await api('trending/movie/day');
@@ -127,6 +127,27 @@ async function getMoviesByCategory(category_id){
     insertMovies(categories, generic_list_general_section, {lazy_load: true});
 };
 
+function getMoreMoviesByCategory(category_id){
+    return async function (){
+        const { scrollTop, scrollHeight, clientHeight} = document.documentElement;
+        const scroll_is_bottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+        const page_is_max = page == max_page;
+
+        if (scroll_is_bottom && !page_is_max) {
+            page ++;
+            const { data } = await api('discover/movie', {
+                params: {
+                    'with_genres': category_id,
+                    page
+                },
+            });
+            const movies = data.results;
+
+            insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
+        }
+    }
+};
+
 async function getMoviesBySearch(query){
     const { data } = await api('search/movie', {
         params: {
@@ -134,8 +155,30 @@ async function getMoviesBySearch(query){
         }
     });
     const movies = data.results;
+    max_page = data.total_pages;
 
     insertMovies(movies, generic_list_general_section, {lazy_load: true});
+};
+
+function getMoreMoviesBySearch(query){
+    return async function (){
+        const { scrollTop, scrollHeight, clientHeight} = document.documentElement;
+        const scroll_is_bottom = (scrollTop + clientHeight) >= (scrollHeight - 15);
+        const page_is_max = page == max_page;
+
+        if (scroll_is_bottom && !page_is_max) {
+            page ++;
+            const { data } = await api('search/movie', {
+                params: {
+                    query,
+                    page,
+                }
+            });
+            const movies = data.results;
+
+            insertMovies(movies, generic_list_general_section, {lazy_load: true, clean: false});
+        }
+    }
 };
 
 async function getMovieById(movie_id){
@@ -164,4 +207,4 @@ async function getRelatedMovies(movie_id){
     const related = await data.results;
 
     insertMovies(related, container_related_movies);
-}
+};

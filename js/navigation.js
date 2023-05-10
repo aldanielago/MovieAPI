@@ -101,6 +101,8 @@ function searchPage(){
     categories_general_section.classList.add('inactive');
     generic_list_general_section.classList.remove('inactive');
     movie_details_general_section.classList.add('inactive');
+
+    infinitive_scroll = getMoreMoviesBySearch(query)
 }
 
 function movieDetailsPage(){
@@ -141,4 +143,5 @@ function categoriesPage(){
     movie_details_general_section.classList.add('inactive');
 
     getMoviesByCategory(category_id);
+    infinitive_scroll = getMoreMoviesByCategory(category_id);
 }
