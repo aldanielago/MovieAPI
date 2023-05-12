@@ -27,9 +27,6 @@ function insertMovies(movies, container, {lazy_load = false, clean = true}){
     movies.forEach(movie => {
         const movie_container = document.createElement('div');
         movie_container.classList.add('movie-container');
-        movie_container.addEventListener('click', () => {
-            location.hash = '#movie=' + movie.id;
-        });
 
         const movie_img = document.createElement('img');
         movie_img.classList.add('movie-img');
@@ -44,14 +41,21 @@ function insertMovies(movies, container, {lazy_load = false, clean = true}){
                 'src', 'https://img.freepik.com/vector-gratis/plantilla-web-error-404-gato-malo_23-2147763345.jpg?size=300&ext=jpg'
             )
         });
+        movie_img.addEventListener('click', () => {
+            location.hash = '#movie=' + movie.id;
+        });
+
         lazyLoader.observe(movie_img);
 
-        const icon = `
-            <span class="icon"><i class="inside bi bi-heart" position-absolute top-0 start-0></i></span>
-        `
+        const btn_liked = document.createElement('button');
+        btn_liked.classList.add('movie-btn');
+        btn_liked.addEventListener('click', () => {
+            btn_liked.classList.toggle('movie-btn--liked');
+            //Agregar la pelicula en local storage
+        })
 
-        movie_container.innerHTML += icon;
         movie_container.appendChild(movie_img);
+        movie_container.appendChild(btn_liked);
         container.appendChild(movie_container);
     });
 }

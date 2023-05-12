@@ -286,6 +286,32 @@ button {
 	min-height: 170px;
 }
 
+.movie-btn {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	padding: 0;
+	margin: 0;
+}
+
+.movie-btn::before {
+	content: '🤍';
+	font-size: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+.movie-btn--liked {
+	background-color: var(--purple-light-2);
+}
+
+.movie-btn--liked::before {
+	content: '💜';
+}
+
 
 /* Movie Detail */
 .movie_detail-container {
