@@ -254,5 +254,5 @@ async function getRelatedMovies(movie_id){
     const { data } = await api(`movie/${movie_id}/recommendations`);
     const related = await data.results;
 
-    insertMovies(related, container_related_movies);
+    insertMovies(related, container_related_movies, {lazy_load: true, clean: true});
 };

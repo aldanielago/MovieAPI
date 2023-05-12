@@ -112,6 +112,7 @@ button {
 
 .movie-container {
 	cursor: pointer;
+	position: relative;
 }
 
 .movie-img {
@@ -364,6 +365,7 @@ button {
 	white-space: nowrap;
 	width: calc(100vw - 24px);
 	padding-bottom: 16px;
+	height: 200px;
 }
 
 .related_movies-scroll_container .movie-container {
