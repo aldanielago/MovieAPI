@@ -15,6 +15,9 @@ const trending_title = $('.trending_preview-title');
 const trending_btn = $('.trending_preview-btn');
 const trending_section = document.querySelector('#trending_preview .trending_preview-movie_list');
 
+// favorite section
+const favorite_section = $('.favorite_preview-movie_list')
+
 // categories section
 const categories_general_section = $('#categories_preview');
 const categories_title = $('.categories_preview-title');

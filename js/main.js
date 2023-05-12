@@ -17,9 +17,44 @@ const lazyLoader = new IntersectionObserver((entries) => {
             entry.target.setAttribute('src', url)
         }
     })
-})
+});
+
+function favoriteMovieList(){
+    const item = JSON.parse(localStorage.getItem('liked-movies'));
+    let movies;
+
+    if(item){
+        movies = item;
+    }
+    else {
+        movies = {};
+    }
+
+    return movies;
+}
+
+function favoriteMovie(movie) {
+    const movie_list = favoriteMovieList();
+    console.log(movie_list);
+    if(movie_list[movie.id]){
+        delete movie_list[movie.id];
+    }
+    else {
+        movie_list[movie.id] = movie;
+    }
+
+    localStorage.setItem('liked-movies', JSON.stringify(movie_list));
+    insertFavoriteMovies();
+}
+
+function insertFavoriteMovies(){
+    const movie_list = favoriteMovieList();
+    const movies = Object.values(movie_list);
+    insertMovies(movies, favorite_section, {lazy_load: true, clean: true});
+}
 
 function insertMovies(movies, container, {lazy_load = false, clean = true}){
+    const movie_list = favoriteMovieList();
     if(clean){
         container.innerHTML = "";
     }
@@ -51,8 +86,12 @@ function insertMovies(movies, container, {lazy_load = false, clean = true}){
         btn_liked.classList.add('movie-btn');
         btn_liked.addEventListener('click', () => {
             btn_liked.classList.toggle('movie-btn--liked');
-            //Agregar la pelicula en local storage
-        })
+            favoriteMovie(movie);
+        });
+
+        if(movie_list[movie.id]){
+            btn_liked.classList.add('movie-btn--liked');
+        }
 
         movie_container.appendChild(movie_img);
         movie_container.appendChild(btn_liked);

@@ -205,13 +205,13 @@ button {
 	padding-bottom: 16px;
 }
 
-.trending_preview-movie_list .movie-container, .favorite_preview-movie_list {
+.trending_preview-movie_list .movie-container, .favorite_preview-movie_list .movie-container{
 	display: inline-block;
 	position: relative;
 	margin-right: 8px;
 }
 
-.trending_preview-movie_list .movie-container .movie-img, .favorite_preview-movie_list {
+.trending_preview-movie_list .movie-container .movie-img, .favorite_preview-movie_list .movie-container .movie-img{
 	height: 225px;
 	min-height: 225px;
 	max-height: 225px;

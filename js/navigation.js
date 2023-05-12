@@ -63,6 +63,7 @@ function homePage(){
 
     getTrendingMoviesPreview();
     getCategoryPreview();
+    insertFavoriteMovies();
 }
 
 function trendsPage(){
