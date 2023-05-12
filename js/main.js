@@ -29,7 +29,7 @@ function insertMovies(movies, container, {lazy_load = false, clean = true}){
         movie_container.classList.add('movie-container');
         movie_container.addEventListener('click', () => {
             location.hash = '#movie=' + movie.id;
-        })
+        });
 
         const movie_img = document.createElement('img');
         movie_img.classList.add('movie-img');
@@ -38,14 +38,19 @@ function insertMovies(movies, container, {lazy_load = false, clean = true}){
         movie_img.setAttribute(
             lazy_load ? 'data-img': 'src' ,
             'https://image.tmdb.org/t/p/w300/' + movie.poster_path
-        )
+        );
         movie_img.addEventListener('error', () => {
             movie_img.setAttribute(
                 'src', 'https://img.freepik.com/vector-gratis/plantilla-web-error-404-gato-malo_23-2147763345.jpg?size=300&ext=jpg'
             )
-        })
+        });
         lazyLoader.observe(movie_img);
 
+        const icon = `
+            <span class="icon"><i class="inside bi bi-heart" position-absolute top-0 start-0></i></span>
+        `
+
+        movie_container.innerHTML += icon;
         movie_container.appendChild(movie_img);
         container.appendChild(movie_container);
     });
